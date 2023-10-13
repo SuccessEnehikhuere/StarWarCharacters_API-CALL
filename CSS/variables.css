@@ -1,0 +1,11 @@
+:root{
+  --bg-color: #150E28;
+  --container-width:100%;
+  --main-display:flex;
+  --white:#fff;
+  --font-one: 'Clash Display', sans-serif;
+  --font-two:'Montserrat', sans-serif;
+  --aqua:aqua;
+  --border: 1px solid gray;
+  --bg-color2:#140D27;
+}
