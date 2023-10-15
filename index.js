@@ -1,35 +1,74 @@
-//click on characters to take me to a new page with the details of the character
-//each name should display a photo, and other details dynamically
+//display names of characters dynamically when page loads
+//each name should display a photo, and other details dynamically when you click on them
+
 
 const API_URL = "https://swapi.dev/api/people";
-let characterNames = document.querySelector('.character-list');
-const detailsHolder = document.getElementById('details-holder');
+
+let characterList = document.querySelector('.character-list');
+// const detailsHolder = document.getElementById('details-holder');
 
 let characterDetails = [];
 
+let characterObject = {};
+let currentIndex = 0;
 
 
+const displayCharacterNames = (characters)=>{
+  characters.forEach((character)=>{
+    characterList.innerHTML += `
+    <ul class="character-list">
+    <li>${character.name}</li>
+    </ul>   
+    `
+  });
+   
+}
+ 
 
-async function fetchCharacters(url){
+async function getCharactersDetails(url){
   try{
   const response = await fetch(url);
-  const result = await response.json();
-  if(response.ok){
-    // console.log(result);
-    characterDetails = result;
-    console.log(characterDetails);
+  const data = await response.json();
+  const characters = data.results;
+  if (response.ok){
+    console.log(characters);
+    
+   displayCharacterNames(characters);
 
+    // characterDetails = result;
+    // // console.log(characterDetails);
+
+    // characterObject = result.results[currentIndex];
+    // // console.log(characterObject);
+    
   }
 
   }
   catch(error){
-    throw new Error ('error in data', error);
+    throw new Error (error);
 
   }
 }
 
+console.log(getCharactersDetails(API_URL));
 
-console.log(fetchCharacters(API_URL));
+
+window.addEventListener('DOMContentLoaded',()=>{
+  getCharactersDetails(API_URL);
+   
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 // characterNames.addEventListener('click',(event)=>{
 //   if(event.target.tagName === 'LI'){
