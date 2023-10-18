@@ -5,26 +5,45 @@
 const API_URL = "https://swapi.dev/api/people";
 
 let characterList = document.querySelector('.character-list');
-// const detailsHolder = document.getElementById('details-holder');
-
-let characterDetails = [];
-
-let characterObject = {};
-let currentIndex = 0;
+let profileDisplayer = document.querySelector('.container-image');
 
 
-const displayCharacterNames = (characters)=>{
-  characters.forEach((character)=>{
-    characterList.innerHTML += `
-    <ul class="character-list">
-    <li>${character.name}</li>
-    </ul>   
-    `
+//function to display list of  names
+
+const displayCharacterNames = (characters) => {
+  characters.forEach((character) => {
+    const characterListItem = document.createElement('li');
+    characterListItem.textContent = character.name;
+    characterListItem.classList.add('character-list-item');
+    
+    // Set up the click event with a function that passes arguments to displayProfiles
+    characterListItem.onclick = () => {
+      // Pass arguments to the displayProfiles function when calling it
+      displayProfiles(character);
+    };
+
+    // Append the list item to the character list
+    characterList.appendChild(characterListItem);
   });
-   
 }
- 
 
+
+//function to get each character details
+const displayProfiles = (profile)=>{
+ // console.log(profile)
+    profileDisplayer.innerHTML += `
+      <h2> ${profile.name} </h2> 
+      <p> ${profile.gender} </p> 
+      <p> ${profile.height} </p>  
+      
+      `
+  
+}
+
+
+
+
+//function to get data
 async function getCharactersDetails(url){
   try{
   const response = await fetch(url);
@@ -34,13 +53,8 @@ async function getCharactersDetails(url){
     console.log(characters);
     
    displayCharacterNames(characters);
-
-    // characterDetails = result;
-    // // console.log(characterDetails);
-
-    // characterObject = result.results[currentIndex];
-    // // console.log(characterObject);
-    
+ 
+     
   }
 
   }
@@ -50,7 +64,7 @@ async function getCharactersDetails(url){
   }
 }
 
-console.log(getCharactersDetails(API_URL));
+// console.log(getCharactersDetails(API_URL));
 
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -62,20 +76,15 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 
 
+characterList.addEventListener('click',(event)=>{
+
+  if(event.target.tagName === 'LI'){
+    // console.log('hello');
+    profileDisplayer.style.display = 'block';
+  }  
+  });
+
+ 
 
 
 
-
-
-
-
-
-// characterNames.addEventListener('click',(event)=>{
-//   if(event.target.tagName === 'LI'){
-//     console.log('hello');
-     
-//   }
-// const details= detailsHolder.classList("container-image");
-// console.log(details);
-
-// })
