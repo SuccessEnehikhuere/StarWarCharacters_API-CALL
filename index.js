@@ -5,7 +5,7 @@
 const API_URL = "https://swapi.dev/api/people";
 
 let characterList = document.querySelector('.character-list');
-let profileDisplayer = document.querySelector('.container-image');
+let profileDisplayer = document.querySelector('.profile-container');
 
 
 //function to display list of  names
@@ -28,17 +28,40 @@ const displayCharacterNames = (characters) => {
 }
 
 
+
+
+
+
+
+
 //function to get each character details
-const displayProfiles = (profile)=>{
- // console.log(profile)
-    profileDisplayer.innerHTML += `
-      <h2> ${profile.name} </h2> 
-      <p> ${profile.gender} </p> 
-      <p> ${profile.height} </p>  
-      
-      `
+
+
+const displayProfiles = (profile) => {
+  const profileDiv = document.createElement('div');
   
-}
+  // Add profile content to the profileDiv element
+  profileDiv.innerHTML = `
+      <button class="profileCloseButton">
+          <i class="fa-solid fa-xmark icon"></i> 
+      </button> 
+      <h2> Name: ${profile.name} </h2> 
+      <p> Gender: ${profile.gender} </p> 
+      <p> Height: ${profile.height} </p>  
+  `;
+
+  // Append the profileDiv element to the profileDisplayer
+  profileDisplayer.appendChild(profileDiv);
+  
+  const closeProfileButton = profileDiv.querySelector('.profileCloseButton');
+  
+  // Add a click event listener to the close button
+  closeProfileButton.addEventListener('click', () => {
+    profileDisplayer.style.display = (profileDisplayer.style.display === 'none' || profileDisplayer.style.display === '') ? 'block' : 'none';
+  });
+};
+
+
 
 
 
@@ -53,8 +76,7 @@ async function getCharactersDetails(url){
     console.log(characters);
     
    displayCharacterNames(characters);
- 
-     
+    
   }
 
   }
@@ -83,6 +105,8 @@ characterList.addEventListener('click',(event)=>{
     profileDisplayer.style.display = 'block';
   }  
   });
+
+
 
  
 

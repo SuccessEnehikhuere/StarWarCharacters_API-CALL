@@ -2,12 +2,11 @@
 *::before,
 *::after{
   box-sizing: border-box;
-}
-
-* {
   padding:0;
   margin:0;
 }
+
+
 
 .hero{
   display:var(--main-display);
@@ -15,7 +14,7 @@
   align-items: center;
   padding-top: 5rem;
   width: 100%;
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
   
 }
 .container{
@@ -24,7 +23,7 @@
   flex-direction: column;
   align-items: center;
   border:1px solid var(--color);
-  background-color: #FBD311;
+  /* background-color: #FBD311; */
   height: 100vh;
   width: 100vw;
   position: relative;
@@ -67,9 +66,7 @@
   width:50%;
   
 } */
-.container-image{
-  display: var(--main-display);
-  justify-content: space-between;
+.profile-container{
   height:100%;
   width:50%;
   border: 1px solid var(--aqua);
@@ -77,4 +74,12 @@
   background-color:  #FBD311;
   bottom:0;
   display:none;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-family: var(--font-two);
+}
+
+.profileCloseButton{
+  margin-left: 8rem;
 }
